@@ -3,8 +3,6 @@ describe('Central de Atendimento ao Cliente TAT', () => {
    cy.visit("./src/index.html")})//BeforeEach usado para não precisar repetir este ponto do testes toda vez
       //  que formos executar o teste
 
-})
-
   it('verifica o título da aplicação', () => { 
 
     cy.title().should('be.equal', 'Central de Atendimento ao Cliente TAT')
@@ -109,7 +107,6 @@ describe('Central de Atendimento ao Cliente TAT', () => {
       .should('have.value', 'youtube')
 
 })
-
   it('seleciona um produto (Mentoria) por seu valor (value)', () => { 
     cy.get('#product')
       .select('mentoria')
@@ -160,7 +157,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
          
 })
 
-  it.only('seleciona um arquivo da pasta fixtures', () => {
+  it('seleciona um arquivo da pasta fixtures', () => {
     cy.get('#file-upload')
       .selectFile('cypress/fixtures/example.json')
       .should(input => {
@@ -168,7 +165,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   //console.log(input[0].files[0].name) //comando para verificar o nome do arquivo
         expect(input[0].files[0].name).to.equal('example.json')
           
-    })     
+})          
 })
 
       
@@ -184,13 +181,16 @@ describe('Central de Atendimento ao Cliente TAT', () => {
 })
 
 
-('seleciona um arquivo utilizando uma fixture para a qual foi dada um alias' , () => {
+it('seleciona um arquivo utilizando uma fixture para a qual foi dada um alias' , () => {
   cy.fixture('example.json').as('sampleFile')
   cy.get('#file-upload')
     .selectFile('@sampleFile')
     .should(input => {
        expect(input[0].files[0].name).to.equal('example.json') })
 })
+
+//Aguardar a resposta do professor para este exercicio.18/07/25
+//corrigido, eram parenteses e chaves faltando
 
 it('verifica que a política de privacidade abre em outra aba sem a necessidade de um clique', () => {
   cy.contains('a', 'Política de Privacidade')//contains foi usado para pegar um dado mais espeifico, no caso politica...
@@ -205,13 +205,8 @@ it('acessa a página da política de privacidade removendo o target e então cli
 
   cy.contains('h1', 'CAC TAT - Política de Privacidade').should('be.visible')
     
-})
+}) 
 
-it('testa a página da política de privacidade de forma independente', () => {
-  cy.visit('./src/privacy.html')//teste direto no link, mandar para outra swit de teste
-  cy.contains('h1', 'CAC TAT - Política de Privacidade').should('be.visible')
-  
- 
 })
 
 
